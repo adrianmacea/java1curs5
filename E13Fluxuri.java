@@ -1,0 +1,49 @@
+import java.io.*;
+
+public class E13Fluxuri{
+    public static void main (String [] args){
+        try{
+            BufferedReader cons = new BufferedReader(
+                new InputStreamReader(System.in)
+            );
+            BufferedReader in = null;
+            PrintStream out = null;
+            
+            String cmd = null;
+            
+            while(true){
+                System.out.print("Comanda: ");
+                cmd = cons.readLine();
+                String [] v = cmd.split("\\s+");
+                
+                if("exit".equalsIgnoreCase(v[0])){
+                    System.out.println("Se inchide...");
+                    break;
+                }
+                
+                if("copy".equalsIgnoreCase(v[0])){
+                    in = new BufferedReader(
+                        new InputStreamReader(
+                            new FileInputStream(v[1])
+                        )
+                    );
+                    
+                    out = new PrintStream(v[2]);
+                    
+                    String line = null;
+                    
+                    while((line = in.readLine()) != null){
+                        out.println(line);
+                    }
+                    in.close();
+                    out.close();
+                    System.out.println("Informatia a fost copiata");
+                }
+                
+            }
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+}
